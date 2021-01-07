@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 //주소 : /jspCommunity/
-@WebServlet("/HomeServlet")
-public class HomeServlet extends HttpServlet {
+@WebServlet("/usr/home/gugudan2")
+public class HomeGugudanServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
@@ -33,7 +33,7 @@ public class HomeServlet extends HttpServlet {
 		req.setAttribute("dan",dan);
 		req.setAttribute("limit",limit);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/jsp/usr/home/index.jsp"); 
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/jsp/usr/home/gugudan2.jsp"); 
 		dispatcher.forward(req, resp);
 		
 	/*	resp.getWriter().append("<h1>" + String.format("구구단 %d단", dan) + "</h1>");
