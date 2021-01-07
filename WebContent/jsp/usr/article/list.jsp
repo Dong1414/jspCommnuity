@@ -16,7 +16,7 @@ Map<String, Object> boardMap = (Map<String, Object>) request.getAttribute("board
 		 리스트</title>
 </head>
 <body>
-	<h1> <%=boardMap.get("name") %>리스트</h1>
+	<h1> <%=boardMap.get("name") %>리스트</h1> 
 	
 	<div>
 	<%
@@ -25,8 +25,8 @@ Map<String, Object> boardMap = (Map<String, Object>) request.getAttribute("board
 		번호 :
 		<%=articleMap.get("id")%>
 		<br />
-		제목 :
-		<%=articleMap.get("title")%>
+		<a href="http://localhost:8080/jspCommnuity/usr/article/detail?id=<%=articleMap.get("id")%>"  > 제목 : <%=articleMap.get("title")%>  </a>
+		<button class="btn" onclik="delete()"> 삭제 </button>
 		<br />
 		내용 :
 		<%=articleMap.get("body")%>

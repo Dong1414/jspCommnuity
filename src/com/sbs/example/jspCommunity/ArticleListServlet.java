@@ -23,7 +23,8 @@ public class ArticleListServlet extends HttpServlet {
 		MysqlUtil.setDBInfo("127.0.0.1", "sbsst", "sbs123414", "jspCommunity");
 
 		if (req.getParameter("boardCode") == null) {
-			resp.getWriter().append("boardCode를 입력해주세요.");			
+			resp.getWriter().append("boardCode를 입력해주세요.");
+			return;
 		}		
 			String boardCode = "";
 
