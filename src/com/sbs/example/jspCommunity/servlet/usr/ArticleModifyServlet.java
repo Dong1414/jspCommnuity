@@ -1,4 +1,4 @@
-package com.sbs.example.jspCommunity;
+package com.sbs.example.jspCommunity.servlet.usr;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sbs.example.jspCommunity.container.Container;
+import com.sbs.example.jspCommunity.service.ArticleService;
 import com.sbs.example.mysqlutil.MysqlUtil;
 import com.sbs.example.mysqlutil.SecSql;
 
-@WebServlet("/usr/article/detail")
-public class ArticleDetailServlet extends HttpServlet {
+@WebServlet("/usr/article/doModify")
+public class ArticleModifyServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -23,19 +25,22 @@ public class ArticleDetailServlet extends HttpServlet {
 		MysqlUtil.setDBInfo("127.0.0.1", "sbsst", "sbs123414", "jspCommunity");
 
 		if (req.getParameter("id") == null) {
-			resp.getWriter().append("id를 입력해주세요.");
+			resp.getWriter().append("글 id를 입력하세요");
 			return;
 		}
-
+		
 		int id = Integer.parseInt(req.getParameter("id"));
+		String title = (String) req.getParameter("title");
+		String body = (String) req.getParameter("body");
 
-		Map<String, Object> articleMap = MysqlUtil
-				.selectRow(new SecSql().append("SELECT * FROM article WHERE `id` = ?", id));
+		
+		ArticleService articleService = Container.articleService;
+		Map<String, Object> article = articleService.modify(id,title,body);
 
-		MysqlUtil.closeConnection();
+		req.setAttribute("title", title);
+		req.setAttribute("body", body);
 
-		req.setAttribute("articleMap", articleMap);
-
-		req.getRequestDispatcher("/jsp/usr/article/detail.jsp").forward(req, resp);
+		req.getRequestDispatcher("/jsp/usr/article/doModify.jsp").forward(req, resp);
 	}
+
 }

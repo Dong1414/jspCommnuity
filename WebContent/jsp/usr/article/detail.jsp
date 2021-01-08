@@ -30,7 +30,9 @@
 		<br /> 내용 :
 		<%=articleMap.get("body")%>
 		<br /> 작성자 :
-		<%=articleMap.get("memberId")%>
+		<%=articleMap.get("extra__writer")%>
+		<br /> 게시판 :
+		<%=articleMap.get("extra__boardName") %>
 		<hr />
 	</div>
 </body>

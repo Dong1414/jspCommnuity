@@ -2,37 +2,36 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.Map"%>
 <%@ page import="java.util.List"%>
+<%@ page import="com.sbs.example.jspCommunity.dto.Article"%>
 <%
-List<Map<String, Object>> articleMapList = (List<Map<String, Object>>) request.getAttribute("articleMapList");
-Map<String, Object> boardMap = (Map<String, Object>) request.getAttribute("boardMap");
+List<Article> articles = (List<Article>) request.getAttribute("articles");
 %>
 <!doctype html>
 <html lang="ko">
 <head>
-
 <meta charset="UTF-8" />
-
-<title> <%=boardMap.get("name") %>
-		 리스트</title>
+<title>게시물 리스트</title>
 </head>
 <body>
-	<h1> <%=boardMap.get("name") %>리스트</h1> 
-	
-	<div>
+	<h1>게시물 리스트</h1>
 	<%
-	for (Map<String, Object> articleMap : articleMapList) {
+	for (Article article : articles) {
 	%>
+	<div>
 		번호 :
-		<%=articleMap.get("id")%>
+		<%=article.id%>
 		<br />
-		<a href="http://localhost:8080/jspCommnuity/usr/article/detail?id=<%=articleMap.get("id")%>"  > 제목 : <%=articleMap.get("title")%>  </a>
-		<button class="btn" onclik="delete()"> 삭제 </button>
+		작성날짜 :
+		<%=article.regDate%>
 		<br />
-		내용 :
-		<%=articleMap.get("body")%>
+		갱신날짜 :
+		<%=article.updateDate%>
 		<br />
 		작성자 :
-		<%=articleMap.get("memberId")%>
+		<%=article.extra__writer%>
+		<br />
+		<a href="http://localhost:8083/jspCommunity/usr/article/detail?id=<%=article.id%>"  > 제목 : <%=article.title%>  </a>
+		<button class="btn" onclik="delete()"> 삭제 </button>
 		<hr />
 	</div>
 	<%

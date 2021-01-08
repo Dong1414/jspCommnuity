@@ -5,6 +5,7 @@
 <%
 String title = (String)request.getAttribute("title");
 String body = (String)request.getAttribute("body");
+String boardId = (String)request.getAttribute("boardId");
 %>
 <!doctype html>
 <html lang="ko">
@@ -15,11 +16,11 @@ String body = (String)request.getAttribute("body");
 <title> 새 글 </title>
 </head>
 <body>
-	<h1> 제목 : <%= title %></h1>
+	<h1> 게시판 : <%= boardId %></h1>	
 	
 	<div>
-		내용 : <%= body %>
-	
+		제목 : <%= title %>
+		내용 : <%= body %>	
 	</div>
 	
 </body>
