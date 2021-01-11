@@ -5,7 +5,7 @@
 <%
 String title = (String)request.getAttribute("title");
 String body = (String)request.getAttribute("body");
-String boardId = (String)request.getAttribute("boardId");
+
 %>
 <!doctype html>
 <html lang="ko">
@@ -16,7 +16,7 @@ String boardId = (String)request.getAttribute("boardId");
 <title> 새 글 </title>
 </head>
 <body>
-	<h1> 게시판 : <%= boardId %></h1>	
+	<h1> 게시판 :</h1>	
 	
 	<div>
 		제목 : <%= title %>

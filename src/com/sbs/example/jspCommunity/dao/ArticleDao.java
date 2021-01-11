@@ -81,7 +81,7 @@ public class ArticleDao {
 		sql.append("ON A.boardId = B.id");				
 		sql.append("WHERE A.id = ?",articleId);
 		Map<String, Object> articleMap = MysqlUtil.selectRow(sql);
-
+		
 		return articleMap;
 	}
 }

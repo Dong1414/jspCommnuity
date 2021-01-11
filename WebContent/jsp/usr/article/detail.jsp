@@ -3,7 +3,7 @@
 <%@ page import="java.util.Map"%>
 <%@ page import="java.util.List"%>
 <%
-	Map<String, Object> articleMap = (Map<String, Object>) request.getAttribute("articleMap");
+	Map<String, Object> articleMap = (Map<String, Object>) request.getAttribute("article");
 %>
 <!doctype html>
 <html lang="ko">
