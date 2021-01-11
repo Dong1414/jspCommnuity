@@ -37,4 +37,9 @@ public class ArticleService {
 	public Map<String, Object> getForPrintArticleByArticleId(int articleId) {
 		return articleDao.detail(articleId);
 	}
+	
+	public String getBoardNameById(int boardId) {
+		return articleDao.getBoardNameById(boardId);
+	}
+
 }

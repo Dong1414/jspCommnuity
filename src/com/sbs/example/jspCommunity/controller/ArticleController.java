@@ -62,9 +62,11 @@ public class ArticleController {
 		String body = (String)req.getParameter("body");								
 		
 		articleService.add(title, body, boardId);	
+		String boardName = articleService.getBoardNameById(boardId);
 		
 		req.setAttribute("title", title);
 		req.setAttribute("body", body);
+		req.setAttribute("boardName", boardName);
 		
 		return "usr/article/doWrite";
 	}
