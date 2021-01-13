@@ -25,6 +25,8 @@
 		<hr>
 		<textarea name="body" placeholder="내용을 입력해주세요." maxlength="1000"></textarea>
 		<hr>
+		<textarea name="hashtag" placeholder="#해쉬태그를 입력하세요." maxlength="100"></textarea>
+		<hr>
 		<input type="submit" value="등록">
 </body>
 </form>

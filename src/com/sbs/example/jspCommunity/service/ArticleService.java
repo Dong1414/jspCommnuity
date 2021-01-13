@@ -30,16 +30,25 @@ public class ArticleService {
 		return articleDao.modify(id,title,body);
 	}
 
-	public Map<String, Object> detail(int articleId) {
+	public Article detail(int articleId) {
 		return articleDao.detail(articleId);
 	}
 
-	public Map<String, Object> getForPrintArticleByArticleId(int articleId) {
+	public Article getForPrintArticleByArticleId(int articleId) {
 		return articleDao.detail(articleId);
 	}
 	
 	public String getBoardNameById(int boardId) {
 		return articleDao.getBoardNameById(boardId);
 	}
+
+	public int hashAdd(String hashtag, int articleId) {
+		return articleDao.hashAdd(hashtag, articleId);
+		
+	}
+
+
+
+	
 
 }

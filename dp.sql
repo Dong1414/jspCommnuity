@@ -152,4 +152,25 @@ boardId = 3,
 title = '자유3',
 `body` = '자유3'; 
 
+CREATE TABLE hashtag (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    articleId INT(10) UNSIGNED NOT NULL,    
+    `hash` CHAR(100)        
+);
+
 SELECT * FROM article;
+SELECT * FROM hashtag;
+
+USE jspCommunity;
+
+SELECT A.* , M.name AS extra__writer, B.name AS extra__boardName, B.code AS extra__boardCode, H.hash AS extra__hashtag
+FROM article AS A
+INNER JOIN `member` AS M
+ON A.memberId = M.id
+INNER JOIN `board` AS B
+ON A.boardId = B.id
+LEFT OUTER JOIN `hashtag` AS H
+ON A.id = H.articleId
+WHERE A.id = 1;

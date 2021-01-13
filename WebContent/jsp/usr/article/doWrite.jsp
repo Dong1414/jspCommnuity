@@ -6,6 +6,8 @@
 String title = (String)request.getAttribute("title");
 String body = (String)request.getAttribute("body");
 String boardName = (String)request.getAttribute("boardName");
+String[] hashtag = (String[])request.getAttribute("hashtag");
+
 %>
 <!doctype html>
 <html lang="ko">
@@ -21,6 +23,8 @@ String boardName = (String)request.getAttribute("boardName");
 	<div>
 		제목 : <%= title %>
 		내용 : <%= body %>	
+		태그 : <%for(int i = 0 ; i < hashtag.length ; i++){%><a href="#">#<%= hashtag[i]%></a><%}%>	
+		
 	</div>
 	
 </body>

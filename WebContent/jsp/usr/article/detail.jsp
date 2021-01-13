@@ -2,8 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.Map"%>
 <%@ page import="java.util.List"%>
+<%@ page import="com.sbs.example.jspCommunity.dto.Article"%>
 <%
-	Map<String, Object> articleMap = (Map<String, Object>) request.getAttribute("article");
+	Article article = (Article) request.getAttribute("article");
 %>
 <!doctype html>
 <html lang="ko">
@@ -11,28 +12,30 @@
 
 <meta charset="UTF-8" />
 
-<title><%=articleMap.get("title")%></title>
+<title><%=article.getTitle()%></title>
 </head>
 <body>
 	<h1>
 		제목 :
-		<%=articleMap.get("title")%></h1>
+		<%=article.getTitle()%></h1>
 
 	<div>
 		생성 날짜:
-		<%=articleMap.get("regDate")%>
+		<%=article.getRegDate()%>
 		<br /> 수정 날짜:
-		<%=articleMap.get("updateDate")%>
+		<%=article.getUpdateDate()%>
 		<br /> 번호 :
-		<%=articleMap.get("id")%>
+		<%=article.getId()%>
 		<br /> 제목 :
-		<%=articleMap.get("title")%>
+		<%=article.getTitle()%>
 		<br /> 내용 :
-		<%=articleMap.get("body")%>
+		<%=article.getBody()%>
 		<br /> 작성자 :
-		<%=articleMap.get("extra__writer")%>
+		<%=article.getExtra__writer()%>
 		<br /> 게시판 :
-		<%=articleMap.get("extra__boardName") %>
+		<%=article.getExtra__boardName()%>
+		<br />
+		<br /> <a href="http://localhost:8083/usr/article/list?boardId=<%=article.getBoardId()%>"  >게시물 리스트</a>		
 		<hr />
 	</div>
 </body>

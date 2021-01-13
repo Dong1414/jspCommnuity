@@ -43,9 +43,7 @@ public class ArticleDao {
 				"INSERT INTO article SET regDate = NOW(), updateDate = NOW(), memberId = 1, boardId = ?, title = ?, `body` = ?",
 				boardId, title, body);
 
-		MysqlUtil.update(sql);
-
-		return 1;
+		return MysqlUtil.insert(sql);
 	}
 
 	public int delete(int id) {
@@ -68,7 +66,7 @@ public class ArticleDao {
 		return null;
 	}
 
-	public Map<String, Object> detail(int articleId) {
+	public Article detail(int articleId) {
 
 		SecSql sql = new SecSql();
 
@@ -76,15 +74,20 @@ public class ArticleDao {
 		sql.append(", M.name AS extra__writer");
 		sql.append(", B.name AS extra__boardName");
 		sql.append(", B.code AS extra__boardCode");
+		sql.append(", H.hash AS extra__hashtag");
 		sql.append("FROM article AS A");
 		sql.append("INNER JOIN `member` AS M");
 		sql.append("ON A.memberId = M.id");
 		sql.append("INNER JOIN `board` AS B");
 		sql.append("ON A.boardId = B.id");
+		sql.append("LEFT OUTER JOIN `hashtag` AS H");
+		sql.append("ON A.id = H.articleId");
 		sql.append("WHERE A.id = ?", articleId);
 		Map<String, Object> articleMap = MysqlUtil.selectRow(sql);
-
-		return articleMap;
+		System.out.println(articleMap);
+		Article article = new Article(articleMap);
+		
+		return article;
 	}
 
 	public String getBoardNameById(int boardId) {
@@ -96,4 +99,15 @@ public class ArticleDao {
 				
 		return MysqlUtil.selectRowStringValue(sql);
 	}
+
+	public int hashAdd(String hashtag, int articleId) {
+		SecSql sql = new SecSql();
+		sql.append(
+				"INSERT INTO hashtag SET regDate = NOW(), updateDate = NOW(), articleId = ?, hash = ?",articleId,hashtag);
+
+		return MysqlUtil.insert(sql);
+		
+	}
+
+	
 }

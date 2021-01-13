@@ -1,21 +1,62 @@
 package com.sbs.example.jspCommunity.dto;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public class Article {
-	public int id;
-	public String regDate;
-	public String updateDate;
-	public String title;
-	public String body;
-	public int memberId;
-	public int boardId;
-	public int hitsCount;
+	private int id;
+	private String regDate;
+	private String updateDate;
+	private String title;
+	private String body;
+	private int memberId;
+	private int boardId;
+	private int hitsCount;
 
-	public String extra__writer;
-	public String extra__boardName;
-	public String extra__boardCode;
+	private String extra__writer;
+	private String extra__boardName;
+	private String extra__boardCode;
+	private String extra__hashtag;
+	
+	public int getId() {
+		return id;
+	}
+	public String getRegDate() {
+		return regDate;
+	}
+	public String getUpdateDate() {
+		return updateDate;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public String getBody() {
+		return body;
+	}
+	public int getMemberId() {
+		return memberId;
+	}
+	public int getBoardId() {
+		return boardId;
+	}
+	public int getHitsCount() {
+		return hitsCount;
+	}
+	public String getExtra__writer() {
+		return extra__writer;
+	}
+	public String getExtra__boardName() {
+		return extra__boardName;
+	}
+	public String getExtra__boardCode() {
+		return extra__boardCode;
+	}
+	public String getExtra__hashtag() {
+		return extra__hashtag;
+	}
 
+	
+	
 	public Article(Map<String, Object> map) {
 		this.id = (int) map.get("id");
 		this.regDate = (String) map.get("regDate");
@@ -37,12 +78,17 @@ public class Article {
 		if (map.containsKey("extra__boardCode")) {
 			this.extra__boardCode = (String) map.get("extra__boardCode");
 		}
+	/*	if (map.containsKey("extra__hashtag")) {
+			this.extra__hashtag = (String) map.get("extra__hashtag");
+		}*/
 	}
 
 	@Override
 	public String toString() {
-		return "Article [id=" + id + ", regDate=" + regDate + ", updateDate=" + updateDate + ", title=" + title + ", body=" + body + ", memberId=" + memberId + ", boardId=" + boardId + ", hitsCount=" + hitsCount + ", extra__writer=" + extra__writer
-				+ ", extra__boardName=" + extra__boardName + ", extra__boardCode=" + extra__boardCode + "]";
+		return "Article [id=" + id + ", regDate=" + regDate + ", updateDate=" + updateDate + ", title=" + title
+				+ ", body=" + body + ", memberId=" + memberId + ", boardId=" + boardId + ", hitsCount=" + hitsCount
+				+ ", extra__writer=" + extra__writer + ", extra__boardName=" + extra__boardName + ", extra__boardCode="
+				+ extra__boardCode + ", extra__hashtag=" + extra__hashtag + "]";
 	}
 
 }

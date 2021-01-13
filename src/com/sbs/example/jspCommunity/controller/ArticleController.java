@@ -30,11 +30,10 @@ public class ArticleController {
 	public String showDetail(HttpServletRequest req, HttpServletResponse resp) {
 		int articleId = Integer.parseInt(req.getParameter("id"));
 
-		Map<String, Object> article = articleService.getForPrintArticleByArticleId(articleId);		
-		
-		
+		Article article = articleService.getForPrintArticleByArticleId(articleId);
+
 		req.setAttribute("article", article);
-		
+
 		return "usr/article/detail";
 	}
 
@@ -48,51 +47,61 @@ public class ArticleController {
 	}
 
 	public String write(HttpServletRequest req, HttpServletResponse resp) {
-		String memberId = (String)req.getParameter("memberId");
-		String boardId = (String)req.getParameter("boardId");			
-		
+		String memberId = (String) req.getParameter("memberId");
+		String boardId = (String) req.getParameter("boardId");
+
 		req.setAttribute("memberId", memberId);
 		req.setAttribute("boardId", boardId);
-		
+
 		return "usr/article/write";
 	}
-	public String doWrite(HttpServletRequest req, HttpServletResponse resp) {		
+
+	public String doWrite(HttpServletRequest req, HttpServletResponse resp) {
 		int boardId = Integer.parseInt(req.getParameter("boardId"));
-		String title = (String)req.getParameter("title");
-		String body = (String)req.getParameter("body");								
-		
-		articleService.add(title, body, boardId);	
+		String title = (String) req.getParameter("title");
+		String body = (String) req.getParameter("body");
+
+		int articleId = articleService.add(title, body, boardId);
 		String boardName = articleService.getBoardNameById(boardId);
-		
+
+		System.out.println(articleId);
+
 		req.setAttribute("title", title);
 		req.setAttribute("body", body);
 		req.setAttribute("boardName", boardName);
-		
+
+		if (req.getParameter("hashtag").length() > 0) {
+			String hashtag = (String) req.getParameter("hashtag");
+
+			articleService.hashAdd(hashtag, articleId);
+
+			String[] hashtagList = (String[]) req.getParameter("hashtag").split(",");			
+			req.setAttribute("hashtag", hashtagList);
+		}
 		return "usr/article/doWrite";
 	}
 
 	public String modify(HttpServletRequest req, HttpServletResponse resp) {
-		String memberId = (String)req.getParameter("memberId");
-		String articleId = (String)req.getParameter("id");			
-		
+		String memberId = (String) req.getParameter("memberId");
+		String articleId = (String) req.getParameter("id");
+
 		req.setAttribute("memberId", memberId);
 		req.setAttribute("articleId", articleId);
-		
+
 		return "usr/article/modify";
 	}
 
 	public String doModify(HttpServletRequest req, HttpServletResponse resp) {
 		int id = Integer.parseInt(req.getParameter("id"));
-		String title = (String)req.getParameter("title");
-		String body = (String)req.getParameter("body");								
-		
-		articleService.modify(id, title, body);		
-		
+		String title = (String) req.getParameter("title");
+		String body = (String) req.getParameter("body");
+
+		articleService.modify(id, title, body);
+
 		req.setAttribute("title", title);
 		req.setAttribute("body", body);
-		
+
 		return "usr/article/doModify";
 	}
-
 
 }
