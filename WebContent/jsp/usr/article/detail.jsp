@@ -35,8 +35,13 @@
 		<br /> 게시판 :
 		<%=article.getExtra__boardName()%>
 		<br />
-		<br /> <a href="http://localhost:8083/usr/article/list?boardId=<%=article.getBoardId()%>"  >게시물 리스트</a>		
+		<br /> <a href="http://localhost:8083/jspCommnuity/usr/article/list?boardId=<%=article.getBoardId()%>"  >게시물 리스트</a>		
 		<hr />
+	</div>
+	<div>
+		<a href="list?boardId=<%=article.getBoardId()%>">리스트로 이동</a>
+		<a href="modify?id=<%=article.getId()%>">수정</a>
+		<a onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) { return false; }" href="doDelete?id=<%=article.getId()%>">삭제</a>
 	</div>
 </body>
 </html>

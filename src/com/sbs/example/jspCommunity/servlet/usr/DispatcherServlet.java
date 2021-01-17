@@ -30,13 +30,13 @@ public class DispatcherServlet extends HttpServlet {
 		String requestUri = req.getRequestURI();
 		String[] requestUriBits = requestUri.split("/");
 
-		if (requestUriBits.length < 4) {
+		if (requestUriBits.length < 5) {
 			resp.getWriter().append("올바른 요청이 아닙니다.");
 			return;
 		}
 
-		String controllerName = requestUriBits[2];
-		String actionMethodName = requestUriBits[3];
+		String controllerName = requestUriBits[3];
+		String actionMethodName = requestUriBits[4];
 
 		MysqlUtil.setDBInfo("127.0.0.1", "sbsst", "sbs123414", "jspCommunity");
 		
@@ -56,8 +56,12 @@ public class DispatcherServlet extends HttpServlet {
 			}
 			else if (actionMethodName.equals("detail")) {				
 				jspPath = articleController.showDetail(req, resp);
+				if(jspPath == null) {
+					resp.getWriter().append("해당 게시글은 존재하지 않습니다.");
+					return;
+				}
 			}
-			else if (actionMethodName.equals("delete")) {
+			else if (actionMethodName.equals("doDelete")) {
 				jspPath = articleController.doDelete(req, resp);
 			}
 			else if (actionMethodName.equals("write")) {

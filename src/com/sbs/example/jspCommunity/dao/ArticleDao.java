@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sbs.example.jspCommunity.dto.Article;
+import com.sbs.example.jspCommunity.dto.Board;
 import com.sbs.example.mysqlutil.MysqlUtil;
 import com.sbs.example.mysqlutil.SecSql;
 
@@ -51,19 +52,50 @@ public class ArticleDao {
 		SecSql sql = new SecSql();
 		sql.append("DELETE FROM article WHERE id = ?", id);
 
-		MysqlUtil.update(sql);
+		
 
-		return id;
+		return MysqlUtil.update(sql);
+	}
+	
+	public Board getBoardById(int id) {
+		SecSql sql = new SecSql();
+		sql.append("SELECT B.*");
+		sql.append("FROM board AS B");
+		sql.append("WHERE B.id = ?", id);
+
+		Map<String, Object> map = MysqlUtil.selectRow(sql);
+
+		if ( map.isEmpty() ) {
+			return null;
+		}
+
+		return new Board(map);
 	}
 
-	public Map<String, Object> modify(int id, String title, String body) {
-
+	public int modify(Map<String, Object> args) {
 		SecSql sql = new SecSql();
-		sql.append("UPDATE article SET updateDate = NOW(), title = ?, body = ? WHERE id = ?", title, body, id);
+		sql.append("UPDATE article");
+		sql.append("SET updateDate = NOW()");
 
-		MysqlUtil.update(sql);
+		boolean needToUpdate = false;
 
-		return null;
+		if (args.get("title") != null) {
+			needToUpdate = true;
+			sql.append(", title = ?", args.get("title"));
+		}
+
+		if (args.get("body") != null) {
+			needToUpdate = true;
+			sql.append(", `body` = ?", args.get("body"));
+		}
+
+		if ( needToUpdate == false ) {
+			return 0;
+		}
+
+		sql.append("WHERE id = ?", args.get("id"));
+
+		return MysqlUtil.update(sql);
 	}
 
 	public Article detail(int articleId) {
@@ -84,7 +116,9 @@ public class ArticleDao {
 		sql.append("ON A.id = H.articleId");
 		sql.append("WHERE A.id = ?", articleId);
 		Map<String, Object> articleMap = MysqlUtil.selectRow(sql);
-		System.out.println(articleMap);
+		if(articleMap.isEmpty()) {			
+			return null;
+		}
 		Article article = new Article(articleMap);
 		
 		return article;

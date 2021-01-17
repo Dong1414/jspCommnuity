@@ -30,7 +30,7 @@ List<Article> articles = (List<Article>) request.getAttribute("articles");
 		작성자 :
 		<%=article.getExtra__writer()%>
 		<br />
-		<a href="http://localhost:8083/usr/article/detail?id=<%=article.getId()%>"  > 제목 : <%=article.getTitle()%>  </a>
+		<a href="http://localhost:8083/jspCommnuity/usr/article/detail?id=<%=article.getId()%>"  > 제목 : <%=article.getTitle()%>  </a>
 		<button class="btn" onclik="delete()"> 삭제 </button>
 		<hr />
 	</div>
